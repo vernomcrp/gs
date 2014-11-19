@@ -11,4 +11,4 @@ class Vehicle(models.Model):
     drive_by = models.ForeignKey(Driver, verbose_name=u"ขับโดย")
 
     def __unicode__(self):
-        return u"ทะเบียนรถ %s"
+        return u"ทะเบียนรถ %s" % self.license_id
