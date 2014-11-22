@@ -3,14 +3,10 @@ from rest_framework import serializers
 from vehicle.models import Vehicle
 
 
-class VehicleSerializer(serializers.Serializer):
-    pk = serializers.Field()
-    license_id = serializers.CharField()
-    description = serializers.CharField()
+class VehicleSerializer(serializers.ModelSerializer):
+    route_paths = serializers.RelatedField(many=True)
+    drive_by = serializers.RelatedField()
 
-    def restore_object(self, attrs, instance=None):
-        if instance:
-            instance.license_id = attrs.get('license_id', instance.license_id)
-            instance.description = attrs.get('description', instance.description)
-            return instance
-        return Vehicle(**attrs)
+    class Meta:
+        model = Vehicle
+        fields = ('license_id', 'description', 'drive_by', 'route_paths')
