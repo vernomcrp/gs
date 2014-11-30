@@ -1,3 +1,4 @@
+from django.views.decorators.csrf import csrf_exempt
 from vehicle.models import Vehicle
 from vehicle.serializers import VehicleSerializer
 from rest_framework.decorators import api_view
@@ -10,7 +11,7 @@ def vehicle_list(request):
         vehicle_list = Vehicle.objects.all()
         serializer = VehicleSerializer(vehicle_list, many=True)
         return Response(serializer.data)
-    else:
+    elif request.method == 'POST':
         serializer = VehicleSerializer(data=request.DATA)
         if serializer.is_valid():
             serializer.save()

@@ -8,7 +8,7 @@ from driver.models import Driver
 class Vehicle(models.Model):
     license_id = models.TextField(verbose_name=u"เลขทะเบียน", null=False, blank=False)
     description = models.TextField(verbose_name=u"รายละเอียดเพิ่มเติม", null=True, blank=True)
-    drive_by = models.ForeignKey(Driver, verbose_name=u"ขับโดย")
+    drive_by = models.ForeignKey(Driver, verbose_name=u"ขับโดย", null=True, blank=True)
 
     def __unicode__(self):
         return u"ทะเบียนรถ %s" % self.license_id
