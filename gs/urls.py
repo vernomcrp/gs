@@ -8,5 +8,6 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/vehicles/$', 'vehicle.views.vehicle_list'),
-    url(r'^api/drive_historys/$', 'drive_history.views.drive_history_list')
+    url(r'^api/drive_historys/$', 'drive_history.views.drive_history_list'),
+    url(r'^api/drive_historys/(?P<vehicle>.+)/$', 'drive_history.views.drive_history_list')
 )

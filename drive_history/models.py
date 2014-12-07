@@ -11,15 +11,19 @@ class Drive_History(models.Model):
     vehicle = models.ForeignKey(Vehicle, related_name='route_paths')
     latitude = models.FloatField()
     longitude = models.FloatField()
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField()
+    created_date = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
-        return u"driver(%s),license(%s), position(%s,%s), start(%s), end(%s)" % (
+        return u"driver(%s),license(%s), position(%s,%s), created(%s), last_modified(%s)" % (
             self.driver.user.get_full_name(),
             self.vehicle.license_id,
             self.latitude,
             self.longitude,
-            self.start_date,
-            self.end_date
+            self.created_date,
+            self.last_modified
         )
+
+    class Meta:
+        ordering = ('-created_date',)
+        get_latest_by = ('created_date',)
